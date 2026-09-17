@@ -1,0 +1,66 @@
+@import './styles/variables.css';
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+#root {
+  width: 1126px;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+input, select, textarea {
+  background-color: var(--surface-0);
+  color: var(--text);
+  border: 1px solid var(--surface-1);
+  padding: 8px;
+  border-radius: 4px;
+}
+
+button {
+  background-color: var(--mauve);
+  color: var(--base);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  filter: brightness(1.1);
+}
+
+table {
+  border-collapse: collapse;
+  margin: 20px 0;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid var(--surface-1);
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: var(--surface-1);
+  color: var(--text);
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--surface-1);
+  margin: 20px 0;
+}
+
+
+
