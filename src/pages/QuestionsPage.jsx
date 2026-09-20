@@ -12,6 +12,7 @@ const QuestionsPage = () => {
   const [editingId, setEditingId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDisciplinaModalOpen, setIsDisciplinaModalOpen] = useState(false);
+  const [isManageDisciplinaModalOpen, setIsManageDisciplinaModalOpen] = useState(false);
   const [newDisciplinaName, setNewDisciplinaName] = useState('');
   const [altText, setAltText] = useState('');
   const [altCorrect, setAltCorrect] = useState(false);
@@ -100,6 +101,21 @@ const QuestionsPage = () => {
       fetchDisciplines();
     } catch (err) {
       alert('Error creating discipline');
+    }
+  };
+
+  const handleDeleteDisciplina = async (id) => {
+    if (window.confirm('Tem certeza que deseja remover esta disciplina? Todas as questões associadas podem ser afetadas.')) {
+      try {
+        await api.delete(`/disciplina/${id}`);
+        fetchDisciplines();
+        if (filterDisciplina === id) {
+          setFilterDisciplina('');
+          fetchQuestions('');
+        }
+      } catch (err) {
+        alert('Error deleting discipline');
+      }
     }
   };
 
@@ -199,11 +215,30 @@ const QuestionsPage = () => {
             </div>
           </div>
         )}
+        {isManageDisciplinaModalOpen && (
+          <div className="modal-overlay" onClick={() => setIsManageDisciplinaModalOpen(false)}>
+            <div className="modal-content" onClick={e => e.stopPropagation()}>
+              <h3>Gerenciar Disciplinas</h3>
+              <ul className="disciplines-manage-list">
+                {disciplines.map(d => (
+                  <li key={d.id} className="discipline-manage-item">
+                    <span>{d.nome}</span>
+                    <button className="btn-delete" onClick={() => handleDeleteDisciplina(d.id)}>Remover</button>
+                  </li>
+                ))}
+              </ul>
+              <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+                <button type="button" onClick={() => setIsManageDisciplinaModalOpen(false)}>Fechar</button>
+              </div>
+            </div>
+          </div>
+        )}
 
         <h3>List of Questions</h3>
         <div className="filter-container">
           <button className="btn-new-question" onClick={() => { setFormData({ enunciado: '', disciplinaId: '', alternativas: [] }); setEditingId(null); setIsModalOpen(true); }}>Nova Questão</button>
           <button className="btn-new-discipline" onClick={handleCreateDisciplina}>Nova Disciplina</button>
+          <button className="btn-manage-disciplines" onClick={() => setIsManageDisciplinaModalOpen(true)}>Gerenciar Disciplinas</button>
           <label htmlFor="discipline-filter">Filtrar por Disciplina:</label>
           <select
             id="discipline-filter"

@@ -117,8 +117,36 @@
   transition: opacity 0.2s;
 }
 
-.btn-new-discipline:hover, .btn-new-question:hover {
+.btn-new-discipline:hover, .btn-new-question:hover, .btn-manage-disciplines:hover {
   opacity: 0.8;
+}
+
+.btn-manage-disciplines {
+  background-color: var(--blue);
+  color: var(--base);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: opacity 0.2s;
+}
+
+.disciplines-manage-list {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.discipline-manage-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+  width: 100%;
 }
 
 .filter-select {
