@@ -22,25 +22,27 @@ const LoginPage = () => {
 
   return (
     <div className="login-container">
-      <h1>Login - Banco de Questões</h1>
-      <form onSubmit={handleSubmit} className="login-form">
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Login</button>
-      </form>
-      {error && <p className="login-error">{error}</p>}
+      <div className="login-form">
+        <h1>Login - Banco de Questões</h1>
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button type="submit">Login</button>
+        </form>
+        {error && <p className="login-error">{error}</p>}
+      </div>
     </div>
   );
 };

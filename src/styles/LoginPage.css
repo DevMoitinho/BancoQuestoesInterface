@@ -9,10 +9,16 @@
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  width: 300px;
+  gap: 20px;
+  width: 350px;
+  padding: 40px;
+  background-color: var(--surface-0);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--surface-1);
 }
 
 .login-error {
   color: var(--error);
+  margin-top: 15px;
 }
