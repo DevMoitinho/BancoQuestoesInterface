@@ -1,19 +1,16 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthService } from '../api/services/AuthService';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [token, setToken] = useState(AuthService.getToken());
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (token) {
-      localStorage.setItem('token', token);
-    } else {
-      localStorage.removeItem('token');
-    }
+    AuthService.setToken(token);
   }, [token]);
 
   const login = (newToken) => {
@@ -25,6 +22,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setToken(null);
     setUser(null);
+    AuthService.logout();
     navigate('/login');
   };
 
