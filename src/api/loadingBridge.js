@@ -1,4 +1,4 @@
-// Simple bridge to allow Axios interceptors (outside React tree)
+// Simple bridge to allow Services (outside React tree)
 // to update the LoadingContext state.
 let setLoadingFn = null;
 
