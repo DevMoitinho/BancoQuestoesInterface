@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-import api from '../api/api';
+import { DisciplineService, TagService } from '../api/services/EntityService';
+import { questionService } from '../api/services/QuestionService';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import '../styles/ExamPage.css';
@@ -17,8 +18,8 @@ const ExamPage = () => {
   useEffect(() => {
     const fetchDisciplines = async () => {
       try {
-        const res = await api.get('/disciplina/list');
-        setDisciplines(res.data);
+        const data = await DisciplineService.list();
+        setDisciplines(data);
       } catch (err) {
         console.error('Error fetching disciplines', err);
       }
@@ -31,8 +32,8 @@ const ExamPage = () => {
     setExam(null);
     setLoading(true);
     try {
-      const res = await api.get(`/questao/${selectedDisciplina}-${size}`);
-      setExam(res.data);
+      const data = await questionService.generateExam(selectedDisciplina, size);
+      setExam(data);
     } catch (err) {
       setError(err.response?.data || 'Error generating exam');
     } finally {
